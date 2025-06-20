@@ -4,6 +4,7 @@ import { Input } from '@/components/ui/input';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
+import { ThemeToggle } from '@/components/ThemeToggle';
 import { trpc } from '@/utils/trpc';
 import { useState, useEffect, useCallback } from 'react';
 import type { Task, CreateTaskInput } from '../../server/src/schema';
@@ -79,11 +80,14 @@ function App() {
   const completedTasks = tasks.filter((task: Task) => task.completed);
 
   return (
-    <div className="min-h-screen bg-gray-50 py-8">
+    <div className="min-h-screen bg-background py-8">
       <div className="max-w-2xl mx-auto px-4">
-        <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">✅ Todo App</h1>
-          <p className="text-gray-600">Stay organized and get things done</p>
+        <div className="flex justify-between items-start mb-8">
+          <div className="text-center flex-1">
+            <h1 className="text-3xl font-bold text-foreground mb-2">✅ Todo App</h1>
+            <p className="text-muted-foreground">Stay organized and get things done</p>
+          </div>
+          <ThemeToggle />
         </div>
 
         {/* Add new task form */}
@@ -114,14 +118,14 @@ function App() {
           <CardHeader>
             <CardTitle className="flex items-center justify-between">
               <span>Tasks</span>
-              <span className="text-sm font-normal text-gray-500">
+              <span className="text-sm font-normal text-muted-foreground">
                 {tasks.length} total, {completedTasks.length} completed
               </span>
             </CardTitle>
           </CardHeader>
           <CardContent>
             {tasks.length === 0 ? (
-              <div className="text-center py-8 text-gray-500">
+              <div className="text-center py-8 text-muted-foreground">
                 <p className="text-lg mb-2">🎯 No tasks yet!</p>
                 <p>Add your first task above to get started.</p>
               </div>
@@ -130,14 +134,14 @@ function App() {
                 {/* Incomplete tasks */}
                 {incompleteTasks.length > 0 && (
                   <div>
-                    <h3 className="font-medium text-gray-900 mb-3">
+                    <h3 className="font-medium text-foreground mb-3">
                       📋 To Do ({incompleteTasks.length})
                     </h3>
                     <div className="space-y-2">
                       {incompleteTasks.map((task: Task) => (
                         <div
                           key={task.id}
-                          className="flex items-center gap-3 p-3 bg-white border rounded-lg hover:shadow-sm transition-shadow"
+                          className="flex items-center gap-3 p-3 bg-card border rounded-lg hover:shadow-sm transition-shadow"
                         >
                           <Checkbox
                             checked={task.completed}
@@ -148,8 +152,8 @@ function App() {
                             htmlFor={`task-${task.id}`}
                             className="flex-1 cursor-pointer"
                           >
-                            <span className="text-gray-900">{task.description}</span>
-                            <div className="text-xs text-gray-500 mt-1">
+                            <span className="text-foreground">{task.description}</span>
+                            <div className="text-xs text-muted-foreground mt-1">
                               Created {task.created_at.toLocaleDateString()}
                             </div>
                           </label>
@@ -157,7 +161,7 @@ function App() {
                             variant="ghost"
                             size="sm"
                             onClick={() => handleDeleteTask(task.id)}
-                            className="text-red-500 hover:text-red-700 hover:bg-red-50"
+                            className="text-red-500 hover:text-red-700 hover:bg-red-50 dark:hover:bg-red-950"
                           >
                             🗑️
                           </Button>
@@ -175,14 +179,14 @@ function App() {
                 {/* Completed tasks */}
                 {completedTasks.length > 0 && (
                   <div>
-                    <h3 className="font-medium text-gray-900 mb-3">
+                    <h3 className="font-medium text-foreground mb-3">
                       ✅ Completed ({completedTasks.length})
                     </h3>
                     <div className="space-y-2">
                       {completedTasks.map((task: Task) => (
                         <div
                           key={task.id}
-                          className="flex items-center gap-3 p-3 bg-gray-50 border rounded-lg opacity-75"
+                          className="flex items-center gap-3 p-3 bg-muted/50 border rounded-lg opacity-75"
                         >
                           <Checkbox
                             checked={task.completed}
@@ -193,10 +197,10 @@ function App() {
                             htmlFor={`task-${task.id}`}
                             className="flex-1 cursor-pointer"
                           >
-                            <span className="text-gray-600 line-through">
+                            <span className="text-muted-foreground line-through">
                               {task.description}
                             </span>
-                            <div className="text-xs text-gray-400 mt-1">
+                            <div className="text-xs text-muted-foreground/75 mt-1">
                               Created {task.created_at.toLocaleDateString()}
                             </div>
                           </label>
@@ -204,7 +208,7 @@ function App() {
                             variant="ghost"
                             size="sm"
                             onClick={() => handleDeleteTask(task.id)}
-                            className="text-red-400 hover:text-red-600 hover:bg-red-50"
+                            className="text-red-400 hover:text-red-600 hover:bg-red-50 dark:hover:bg-red-950"
                           >
                             🗑️
                           </Button>
@@ -219,7 +223,7 @@ function App() {
         </Card>
 
         {/* Footer */}
-        <div className="text-center mt-8 text-gray-400 text-sm">
+        <div className="text-center mt-8 text-muted-foreground text-sm">
           <p>✨ Simple, clean, and effective task management</p>
         </div>
       </div>
