@@ -1,131 +1,111 @@
+/* Black and White Theme Override */
 :root {
-  --background: #fff;
-  --text: #000;
-  --text-secondary: #666;
-  --spinner-border: #000;
-  --spinner-border-top: transparent;
-  --dot-color: #000;
-  --grid-color: rgba(0,0,0,0.05);
-  --gradient-color: rgba(0,0,0,0.03);
+  /* Light theme - Black and White */
+  --background: hsl(0 0% 100%); /* Pure white */
+  --foreground: hsl(0 0% 0%); /* Pure black */
+  --card: hsl(0 0% 100%); /* Pure white */
+  --card-foreground: hsl(0 0% 0%); /* Pure black */
+  --popover: hsl(0 0% 100%); /* Pure white */
+  --popover-foreground: hsl(0 0% 0%); /* Pure black */
+  --primary: hsl(0 0% 0%); /* Pure black */
+  --primary-foreground: hsl(0 0% 100%); /* Pure white */
+  --secondary: hsl(0 0% 95%); /* Very light gray */
+  --secondary-foreground: hsl(0 0% 0%); /* Pure black */
+  --muted: hsl(0 0% 95%); /* Very light gray */
+  --muted-foreground: hsl(0 0% 40%); /* Dark gray */
+  --accent: hsl(0 0% 95%); /* Very light gray */
+  --accent-foreground: hsl(0 0% 0%); /* Pure black */
+  --destructive: hsl(0 0% 20%); /* Dark gray for destructive actions */
+  --destructive-foreground: hsl(0 0% 100%); /* Pure white */
+  --border: hsl(0 0% 85%); /* Light gray */
+  --input: hsl(0 0% 98%); /* Very light gray */
+  --ring: hsl(0 0% 50%); /* Medium gray */
+  --radius: 0.5rem;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-      --background: #000;
-      --text: #fff;
-      --text-secondary: #888;
-      --spinner-border: #fff;
-      --spinner-border-top: transparent;
-      --dot-color: #fff;
-      --grid-color: rgba(255,255,255,0.05);
-      --gradient-color: rgba(255,255,255,0.03);
-  }
+.dark {
+  /* Dark theme - Black and White */
+  --background: hsl(0 0% 8%); /* Very dark gray/black */
+  --foreground: hsl(0 0% 95%); /* Very light gray/white */
+  --card: hsl(0 0% 12%); /* Dark gray */
+  --card-foreground: hsl(0 0% 95%); /* Very light gray */
+  --popover: hsl(0 0% 12%); /* Dark gray */
+  --popover-foreground: hsl(0 0% 95%); /* Very light gray */
+  --primary: hsl(0 0% 90%); /* Light gray */
+  --primary-foreground: hsl(0 0% 10%); /* Very dark gray */
+  --secondary: hsl(0 0% 20%); /* Dark gray */
+  --secondary-foreground: hsl(0 0% 95%); /* Very light gray */
+  --muted: hsl(0 0% 20%); /* Dark gray */
+  --muted-foreground: hsl(0 0% 60%); /* Medium gray */
+  --accent: hsl(0 0% 20%); /* Dark gray */
+  --accent-foreground: hsl(0 0% 95%); /* Very light gray */
+  --destructive: hsl(0 0% 70%); /* Light gray for destructive actions */
+  --destructive-foreground: hsl(0 0% 10%); /* Very dark gray */
+  --border: hsl(0 0% 25%); /* Medium-dark gray */
+  --input: hsl(0 0% 18%); /* Dark gray */
+  --ring: hsl(0 0% 50%); /* Medium gray */
 }
+
+/* Additional black and white styling */
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+  border-color: hsl(var(--border));
 }
+
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: var(--background);
-  color: var(--text);
-  padding: 20px;
-  line-height: 1.5;
-  transition: background-color 0.3s ease, color 0.3s ease;
-}
-.container {
-  text-align: center;
-  max-width: 600px;
-}
-h1.title {
-  font-size: 2.5rem;
-  font-weight: 700;
-  margin-bottom: 1rem;
-  letter-spacing: -0.02em;
-}
-p.description {
-  font-size: 1.125rem;
-  color: var(--text-secondary);
-  margin-bottom: 2rem;
-}
-.spinner {
-  width: 40px;
-  height: 40px;
-  margin: 2rem auto;
-  position: relative;
-}
-.spinner::before {
-  content: '';
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  border: 2px solid var(--spinner-border);
-  border-top-color: var(--spinner-border-top);
-  border-radius: 50%;
-  animation: spin 1s linear infinite;
-}
-.dots {
-  display: flex;
-  justify-content: center;
-  gap: 4px;
-  margin-top: 2rem;
-}
-.dot {
-  width: 4px;
-  height: 4px;
-  background: var(--dot-color);
-  border-radius: 50%;
-  animation: fade 1.4s infinite ease-in-out;
-}
-.dot:nth-child(1) { animation-delay: -0.32s; }
-.dot:nth-child(2) { animation-delay: -0.16s; }
-@keyframes spin {
-  to { transform: rotate(360deg); }
-}
-@keyframes fade {
-  0%, 80%, 100% { opacity: 0; }
-  40% { opacity: 1; }
-}
-.grid {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: -1;
-  background-image: 
-      linear-gradient(to right, var(--grid-color) 1px, transparent 1px),
-      linear-gradient(to bottom, var(--grid-color) 1px, transparent 1px);
-  background-size: 24px 24px;
-  transition: background-image 0.3s ease;
-}
-.gradient {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: -2;
-  background: radial-gradient(circle at center, var(--gradient-color) 0%, transparent 50%);
-  transition: background 0.3s ease;
+  background-color: hsl(var(--background));
+  color: hsl(var(--foreground));
 }
 
-.footer {
-  position: fixed;
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  font-size: 0.9rem;
-  color: var(--text-secondary);
+/* Ensure strict black and white contrast */
+.bg-background {
+  background-color: hsl(var(--background)) !important;
 }
 
-.footer-link {
-  color: var(--text);
-  text-decoration: none;
-  font-weight: bold;
+.text-foreground {
+  color: hsl(var(--foreground)) !important;
+}
+
+.border-border {
+  border-color: hsl(var(--border)) !important;
+}
+
+.bg-card {
+  background-color: hsl(var(--card)) !important;
+}
+
+.bg-muted {
+  background-color: hsl(var(--muted)) !important;
+}
+
+.text-muted-foreground {
+  color: hsl(var(--muted-foreground)) !important;
+}
+
+.bg-input {
+  background-color: hsl(var(--input)) !important;
+}
+
+.text-destructive {
+  color: hsl(var(--destructive)) !important;
+}
+
+.bg-destructive {
+  background-color: hsl(var(--destructive)) !important;
+}
+
+.bg-accent {
+  background-color: hsl(var(--accent)) !important;
+}
+
+/* Override any potential color bleeding */
+.shadow-sm {
+  box-shadow: 0 1px 2px 0 hsl(var(--border)) !important;
+}
+
+.shadow-md {
+  box-shadow: 0 4px 6px -1px hsl(var(--border)), 0 2px 4px -2px hsl(var(--border)) !important;
+}
+
+.shadow-lg {
+  box-shadow: 0 10px 15px -3px hsl(var(--border)), 0 4px 6px -4px hsl(var(--border)) !important;
 }
